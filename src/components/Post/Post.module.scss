@@ -1,0 +1,15 @@
+.item {
+  color: white;
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+  margin-left: 10px;
+  & img {
+    width: 40px;
+    margin-right: 20px;
+  }
+
+  .like {
+    margin-left: 10px;
+  }
+}

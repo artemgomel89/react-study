@@ -1,0 +1,22 @@
+.nav {
+  grid-area: n;
+  background-color: rgb(19, 175, 123);
+}
+
+.item {
+  & a {
+    color: white;
+    text-decoration: none;
+
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+
+  .active {
+    color: gold;
+  }
+
+}
+
+
