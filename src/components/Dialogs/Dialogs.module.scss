@@ -1,0 +1,36 @@
+.dialogs {
+  display: grid;
+  grid-template-columns: 2fr 6fr;
+}
+
+.dialogItems {
+  .active {
+    color: slateblue;
+  }
+}
+
+.rightColumn {
+  display: flex;
+  align-items: flex-end;
+}
+
+.dialog {
+  padding: 5px;
+  color: black;
+  text-decoration: none;
+}
+
+.dialogItems {
+  display: flex;
+  flex-direction: column;
+}
+
+.message {
+  padding: 5px;
+}
+
+.messages {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}

@@ -1,5 +1,5 @@
-import React from 'react'
-import s from './Post.module.scss'
+import React from 'react';
+import s from './Post.module.scss';
 
 const Post = (props) => {
   return (
@@ -10,9 +10,10 @@ const Post = (props) => {
           alt="user-avatar"
         />
         <div>{props.content}</div>
+        <div className={s.likesCount}>{props.likesCount}</div>
         <button className={s.like}>{props.btnName}</button>
       </div>
     </div>
-  )
-}
-export default Post
+  );
+};
+export default Post;
