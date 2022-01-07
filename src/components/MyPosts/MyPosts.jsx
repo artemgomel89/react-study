@@ -3,11 +3,16 @@ import s from './MyPosts.module.scss';
 import Post from '../Post/Post';
 
 const MyPosts = () => {
-  const postData = [
+  const posts = [
     { id: 1, message: 'How are you?', likesCount: 12 },
     { id: 2, message: 'The weather is great', likesCount: 8 },
     { id: 2, message: 'Keep going man', likesCount: 8 },
   ];
+
+  const postsElements = posts.map((p) => (
+    <Post content={p.message} btnName={`like`} likesCount={p.likesCount} />
+  ));
+
   return (
     <div>
       My post
@@ -17,23 +22,7 @@ const MyPosts = () => {
         <button>Remove</button>
       </div>
       <h4>New post</h4>
-      <div className={s.posts}>
-        <Post
-          content={postData[0].message}
-          btnName={`like`}
-          likesCount={postData[0].likesCount}
-        />
-        <Post
-          content={postData[1].message}
-          btnName={`like`}
-          likesCount={postData[1].likesCount}
-        />
-        <Post
-          content={postData[2].message}
-          btnName={`like`}
-          likesCount={postData[2].likesCount}
-        />
-      </div>
+      <div className={s.posts}>{postsElements}</div>
     </div>
   );
 };
