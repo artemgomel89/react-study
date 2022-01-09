@@ -10,7 +10,9 @@ const ProfileInfo = (props) => {
         alt="dog"
         className={s.dog}
       />
-      <div> ava + description</div>
+      <div>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio, velit.
+      </div>
     </div>
   );
 };

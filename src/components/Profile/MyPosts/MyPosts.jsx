@@ -14,13 +14,15 @@ const MyPosts = (props) => {
 
   return (
     <div>
-      My post
-      <div className={s.addPost}>
-        <textarea />
-        <button>Add post</button>
-        <button>Remove</button>
-      </div>
       <h4>New post</h4>
+      <div className={s.addPost}>
+        <textarea className={s.textArea} />
+        <div className="buttons">
+          <button className={s.postBtn}>Add post</button>
+          <button className={s.postBtn}>Remove</button>
+        </div>
+      </div>
+      <h4>My posts</h4>
       <div className={s.posts}>{postsElements}</div>
     </div>
   );

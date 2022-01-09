@@ -15,5 +15,22 @@
 
 .addPost {
   display: flex;
+  align-items: center;
+}
 
+.textArea {
+  min-height: 100px;
+  margin-right: 25px;
+}
+
+.postBtn {
+  border: 0;
+  padding: 10px;
+  border-radius: 15px;
+  margin-right: 15px;
+  cursor: pointer;
+  transition: 0.1s;
+  &:hover {
+    background-color: #86a9a9;
+  }
 }
