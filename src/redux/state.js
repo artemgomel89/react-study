@@ -1,6 +1,9 @@
 import { renderDom } from '../render';
+import profileReducer from './profile-reducer';
+import dialogsReducer from './dialogs-reducer';
+import sideBarReducer from './sideBar-reducer';
 
-const CONSTANTS = {
+export const CONSTANTS = {
   ADD_POST: 'ADD-POST',
   UPDATE_NEW_POST_TEXT: 'UPDATE-NEW-POST-TEXT',
   UPDATE_NEW_MESSAGE_BODY: 'UPDATE-NEW-MESSAGE-BODY',
@@ -47,38 +50,9 @@ export const store = {
   },
   subscribe(observer) {},
   dispatch(action) {
-    if (action.type === CONSTANTS.ADD_POST) {
-      const actualMessage = this.getState().profilePage.newPostText;
-      const newPost = {
-        id: 2,
-        message: actualMessage,
-        likesCount: 8,
-      };
-      this._state.profilePage.posts.push(newPost);
-      renderDom(this._state);
-    } else if (action.type === CONSTANTS.UPDATE_NEW_POST_TEXT) {
-      this._state.profilePage.newPostText = action.newText;
-      renderDom(this._state);
-    } else if (action.type === CONSTANTS.UPDATE_NEW_MESSAGE_BODY) {
-      this._state.dialogsPage.newMessageBody = action.body;
-      renderDom(this._state);
-    } else if (action.type === CONSTANTS.SEND_MESSAGE) {
-      const messageBody = (this._state.dialogsPage.newMessageBody =
-        action.body);
-      this._state.dialogsPage.messages.push({ id: 6, message: messageBody });
-      renderDom(this._state);
-    }
+    this._state.profilePage = profileReducer(this._state.profilePage, action);
+    this._state.profilePage = dialogsReducer(this._state.dialogsPage, action);
+    this._state.sidebar = sideBarReducer(this._state.sidebar, action);
+    renderDom(this._state);
   },
 };
-
-export const addPostCreator = () => ({ type: CONSTANTS.ADD_POST });
-
-export const updateNewPostCreator = (newChar) => ({
-  type: CONSTANTS.UPDATE_NEW_POST_TEXT,
-  newText: newChar,
-});
-
-export const clearTextAreaCreator = () => ({
-  type: CONSTANTS.UPDATE_NEW_POST_TEXT,
-  newText: '',
-});

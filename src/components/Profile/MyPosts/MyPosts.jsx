@@ -5,7 +5,7 @@ import {
   addPostCreator,
   clearTextAreaCreator,
   updateNewPostCreator,
-} from '../../../redux/state';
+} from '../../../redux/profile-reducer';
 
 const MyPosts = (props) => {
   const postsElements = props.state.posts.map((p, pos) => (

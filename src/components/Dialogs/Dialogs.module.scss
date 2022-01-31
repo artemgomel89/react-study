@@ -54,3 +54,12 @@
   flex-direction: column;
   justify-content: flex-end;
 }
+
+.sendMessage {
+  padding: 10px ;
+  display: flex;
+  align-items: center;
+  button {
+    margin-right: 10px;
+  }
+}
