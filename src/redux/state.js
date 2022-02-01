@@ -1,4 +1,3 @@
-import { renderDom } from '../render';
 import profileReducer from './profile-reducer';
 import dialogsReducer from './dialogs-reducer';
 import sideBarReducer from './sideBar-reducer';
@@ -53,6 +52,5 @@ export const store = {
     this._state.profilePage = profileReducer(this._state.profilePage, action);
     this._state.profilePage = dialogsReducer(this._state.dialogsPage, action);
     this._state.sidebar = sideBarReducer(this._state.sidebar, action);
-    renderDom(this._state);
   },
 };

@@ -1,14 +1,12 @@
 import React from 'react';
 import s from './MyPosts.module.scss';
 import Post from './Post/Post';
-import {
-  addPostCreator,
-  clearTextAreaCreator,
-  updateNewPostCreator,
-} from '../../../redux/profile-reducer';
 
 const MyPosts = (props) => {
-  const postsElements = props.state.posts.map((p, pos) => (
+  let posts = props.state.posts;
+  let newPostText = props.state.newPostText;
+
+  const postsElements = posts.map((p, pos) => (
     <Post
       content={p.message}
       btnName={`like`}
@@ -19,14 +17,11 @@ const MyPosts = (props) => {
 
   const newPostElement = React.createRef();
 
-  const addPost = () => {
-    props.dispatch(addPostCreator());
-    props.dispatch(clearTextAreaCreator());
-  };
+  const addPost = () => props.addPost();
 
-  let onPostChange = () => {
+  const onPostChange = () => {
     const newChar = newPostElement.current.value;
-    props.dispatch(updateNewPostCreator(newChar));
+    return props.updatePost(newChar);
   };
 
   return (
@@ -37,7 +32,7 @@ const MyPosts = (props) => {
           onChange={onPostChange}
           className={s.textArea}
           ref={newPostElement}
-          value={props.state.newPostText}
+          value={newPostText}
         />
         <div className="buttons">
           <button className={s.postBtn} onClick={addPost}>

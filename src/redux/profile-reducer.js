@@ -1,23 +1,15 @@
-const CONSTANTS = {
-  ADD_POST: 'ADD-POST',
-  UPDATE_NEW_POST_TEXT: 'UPDATE-NEW-POST-TEXT',
-  UPDATE_NEW_MESSAGE_BODY: 'UPDATE-NEW-MESSAGE-BODY',
-  SEND_MESSAGE: 'SEND-MESSAGE',
+import { CONSTANTS } from './state';
+
+const initialState = {
+  posts: [
+    { id: 1, message: 'How are you?', likesCount: 12 },
+    { id: 2, message: 'The weather is great', likesCount: 8 },
+    { id: 2, message: 'Keep going man', likesCount: 8 },
+  ],
+  newPostText: 'IT-KAMASUTRA',
 };
 
-export const addPostCreator = () => ({ type: CONSTANTS.ADD_POST });
-
-export const updateNewPostCreator = (newChar) => ({
-  type: CONSTANTS.UPDATE_NEW_POST_TEXT,
-  newText: newChar,
-});
-
-export const clearTextAreaCreator = () => ({
-  type: CONSTANTS.UPDATE_NEW_POST_TEXT,
-  newText: '',
-});
-
-const profileReducer = (state, action) => {
+const profileReducer = (state = initialState, action) => {
   switch (action.type) {
     case CONSTANTS.ADD_POST:
       const actualMessage = state.newPostText;
@@ -37,5 +29,17 @@ const profileReducer = (state, action) => {
       return state;
   }
 };
+
+export const addPostCreator = () => ({ type: CONSTANTS.ADD_POST });
+
+export const updateNewPostCreator = (newChar) => ({
+  type: CONSTANTS.UPDATE_NEW_POST_TEXT,
+  newText: newChar,
+});
+
+export const clearTextAreaCreator = () => ({
+  type: CONSTANTS.UPDATE_NEW_POST_TEXT,
+  newText: '',
+});
 
 export default profileReducer;

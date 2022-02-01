@@ -1,16 +1,24 @@
-const CONSTANTS = {
-  ADD_POST: 'ADD-POST',
-  UPDATE_NEW_POST_TEXT: 'UPDATE-NEW-POST-TEXT',
-  UPDATE_NEW_MESSAGE_BODY: 'UPDATE-NEW-MESSAGE-BODY',
-  SEND_MESSAGE: 'SEND-MESSAGE',
-};
-export const sendMessageCreator = () => ({ type: CONSTANTS.SEND_MESSAGE });
-export const updateNewMessageBodyCreator = (text) => ({
-  type: CONSTANTS.UPDATE_NEW_MESSAGE_BODY,
-  body: text,
-});
+import { CONSTANTS } from './state';
 
-const dialogsReducer = (state, action) => {
+const initialState = {
+  dialogs: [
+    { id: 1, name: 'Sasha' },
+    { id: 2, name: 'Ivan' },
+    { id: 3, name: 'Grigory' },
+    { id: 4, name: 'Stepan' },
+    { id: 5, name: 'Katya' },
+  ],
+  messages: [
+    { id: 1, message: 'How are you?' },
+    { id: 2, message: 'The weather is great' },
+    { id: 3, message: 'ok,i got you' },
+    { id: 4, message: 'Keep going, man!' },
+    { id: 5, message: 'See you soon' },
+  ],
+  newMessageBody: '',
+};
+
+const dialogsReducer = (state = initialState, action) => {
   switch (action.type) {
     case CONSTANTS.UPDATE_NEW_MESSAGE_BODY:
       state.newMessageBody = action.body;
@@ -23,11 +31,18 @@ const dialogsReducer = (state, action) => {
         id: 6,
         message: messageBody,
       });
+      console.log(state.messages);
       return state;
 
     default:
       return state;
   }
 };
+
+export const sendMessageCreator = () => ({ type: CONSTANTS.SEND_MESSAGE });
+export const updateNewMessageBodyCreator = (text) => ({
+  type: CONSTANTS.UPDATE_NEW_MESSAGE_BODY,
+  body: text,
+});
 
 export default dialogsReducer;

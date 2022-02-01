@@ -1,4 +1,3 @@
-import React from 'react';
 import s from './Dialogs.module.scss';
 import DialogItem from './DialogItem/DialogItem';
 import Message from './Message/Message';
@@ -8,17 +7,17 @@ import {
 } from '../../redux/dialogs-reducer';
 
 const Dialogs = (props) => {
-  const dialogsElements = props.state.dialogs.map((d, pos) => (
+  const state = props.state;
+  const dialogsElements = state.dialogs.map((d, pos) => (
     <DialogItem name={d.name} id={d.id} key={pos} />
   ));
 
-  const messagesElements = props.state.messages.map((m, pos) => (
+  const messagesElements = state.messages.map((m, pos) => (
     <Message message={m.message} id={m.id} key={pos} />
   ));
 
   const addMessage = () => {
-    if (props.state.newMessageBody.length !== 0)
-      props.dispatch(sendMessageCreator());
+    if (state.newMessageBody.length !== 0) props.dispatch(sendMessageCreator());
   };
 
   const updateTextArea = (e) => {
