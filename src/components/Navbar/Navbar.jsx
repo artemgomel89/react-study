@@ -2,6 +2,7 @@ import React from 'react';
 import s from './Navbar.module.scss';
 import { NavLink } from 'react-router-dom';
 import Friends from '../Friends/Friends';
+import StoreContext from '../../StoreContext';
 
 const Navbar = () => {
   return (
@@ -46,7 +47,9 @@ const Navbar = () => {
           Settings
         </NavLink>
       </div>
-      {(store) => <Friends friends={store.getState().sideBar.friends} />}
+      <StoreContext.Consumer>
+        {(store) => <Friends friends={store.getState().sideBar.friends} />}
+      </StoreContext.Consumer>
     </nav>
   );
 };
