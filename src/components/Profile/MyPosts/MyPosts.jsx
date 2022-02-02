@@ -3,8 +3,8 @@ import s from './MyPosts.module.scss';
 import Post from './Post/Post';
 
 const MyPosts = (props) => {
-  let posts = props.state.posts;
-  let newPostText = props.state.newPostText;
+  let posts = props.posts;
+  let newPostText = props.newPostText;
 
   const postsElements = posts.map((p, pos) => (
     <Post

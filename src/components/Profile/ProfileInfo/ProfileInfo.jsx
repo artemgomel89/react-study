@@ -2,7 +2,7 @@ import React from 'react';
 import './ProfileInfo.module.scss';
 import s from './ProfileInfo.module.scss';
 
-const ProfileInfo = (props) => {
+const ProfileInfo = () => {
   return (
     <div>
       <img
