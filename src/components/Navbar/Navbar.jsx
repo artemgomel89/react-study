@@ -2,9 +2,10 @@ import React from 'react';
 import s from './Navbar.module.scss';
 import { NavLink } from 'react-router-dom';
 import Friends from '../Friends/Friends';
-import StoreContext from '../../StoreContext';
+import { useSelector } from 'react-redux';
 
 const Navbar = () => {
+  const friends = useSelector((state) => state.sideBar.friends);
   return (
     <nav className={s.nav}>
       <div className={`${s.item}`}>
@@ -13,6 +14,14 @@ const Navbar = () => {
           className={(navData) => (navData.isActive ? `${s.active}` : 'none')}
         >
           Profile
+        </NavLink>
+      </div>
+      <div className={s.item}>
+        <NavLink
+          to="users"
+          className={(navData) => (navData.isActive ? `${s.active}` : 'none')}
+        >
+          Users
         </NavLink>
       </div>
       <div className={s.item}>
@@ -47,9 +56,8 @@ const Navbar = () => {
           Settings
         </NavLink>
       </div>
-      <StoreContext.Consumer>
-        {(store) => <Friends friends={store.getState().sideBar.friends} />}
-      </StoreContext.Consumer>
+
+      <Friends friends={friends} />
     </nav>
   );
 };
