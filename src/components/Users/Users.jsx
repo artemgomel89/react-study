@@ -8,15 +8,49 @@ class Users extends React.Component {
 
   componentDidMount() {
     axios
-      .get('https://social-network.samuraijs.com/api/1.0/users')
+      .get(
+        `https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${this.props.currentPage}`
+      )
       .then((resp) => {
         this.props.setUsers(resp.data.items);
       });
   }
 
+  onPageChanged = (pageNum) => {
+    this.props.setCurrentPage(pageNum);
+    axios
+      .get(
+        `https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${this.props.currentPage}`
+      )
+      .then((resp) => {
+        this.props.setUsers(resp.data.items);
+      });
+  };
+
   render = () => {
+    const pagesCount = Math.ceil(
+      this.props.totalUsersCount / this.props.pageSize
+    );
+
+    const pagesList = [];
+    for (let i = 1; i <= pagesCount; i++) {
+      pagesList.push(i);
+    }
+
     return (
       <div>
+        <div className={s.pagination}>
+          {pagesList.map((el) => (
+            <span
+              className={el === this.props.currentPage ? s.active : null}
+              onClick={() => {
+                this.onPageChanged(el);
+              }}
+            >
+              {el}
+            </span>
+          ))}
+        </div>
         {this.props.users.map((e) => {
           return (
             <div className={s.card} key={e.id}>

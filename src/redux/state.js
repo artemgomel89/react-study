@@ -9,6 +9,7 @@ export const CONSTANTS = {
   SEND_MESSAGE: 'SEND-MESSAGE',
   FOLLOW_TOGGLE: 'FOLLOW-TOGGLE',
   SET_USERS: 'SET-USERS',
+  SET_CURRENT_PAGE: 'SET-CURRENT-PAGE',
 };
 
 export const store = {
