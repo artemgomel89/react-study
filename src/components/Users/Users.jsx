@@ -1,65 +1,41 @@
 import s from './Users.module.scss';
-import axios from 'axios';
+import logo from '../../assets/avatar-svgrepo-com.svg';
 import React from 'react';
-class Users extends React.Component {
-  constructor(props) {
-    super(props);
+import Spinner from '../Spinner/Spinner';
+const Users = (props) => {
+  const pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
+
+  const pagesList = [];
+  for (let i = 1; i <= pagesCount; i++) {
+    pagesList.push(i);
   }
 
-  componentDidMount() {
-    axios
-      .get(
-        `https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${this.props.currentPage}`
-      )
-      .then((resp) => {
-        this.props.setUsers(resp.data.items);
-      });
-  }
-
-  onPageChanged = (pageNum) => {
-    this.props.setCurrentPage(pageNum);
-    axios
-      .get(
-        `https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${this.props.currentPage}`
-      )
-      .then((resp) => {
-        this.props.setUsers(resp.data.items);
-      });
-  };
-
-  render = () => {
-    const pagesCount = Math.ceil(
-      this.props.totalUsersCount / this.props.pageSize
-    );
-
-    const pagesList = [];
-    for (let i = 1; i <= pagesCount; i++) {
-      pagesList.push(i);
-    }
-
-    return (
-      <div>
-        <div className={s.pagination}>
-          {pagesList.map((el) => (
-            <span
-              className={el === this.props.currentPage ? s.active : null}
-              onClick={() => {
-                this.onPageChanged(el);
-              }}
-            >
-              {el}
-            </span>
-          ))}
-        </div>
-        {this.props.users.map((e) => {
+  return (
+    <div className={s.wrapper}>
+      <div className={s.pagination}>
+        {pagesList.map((el) => (
+          <span
+            className={el === props.currentPage ? s.active : null}
+            onClick={() => {
+              props.onPageChanged(el);
+            }}
+          >
+            {el}
+          </span>
+        ))}
+      </div>
+      {props.isLoading ? (
+        <Spinner />
+      ) : (
+        props.users.map((e) => {
           return (
             <div className={s.card} key={e.id}>
               <div className={s.left}>
-                <img alt="avatar" />
+                <img alt="avatar" src={logo} />
                 <button
                   className={s.followBtn}
                   onClick={() => {
-                    this.props.followToggle(e.id);
+                    props.followToggle(e.id);
                   }}
                 >
                   {e.isFollowed ? 'Unfollow' : 'Follow'}
@@ -77,10 +53,10 @@ class Users extends React.Component {
               </div>
             </div>
           );
-        })}
-      </div>
-    );
-  };
-}
+        })
+      )}
+    </div>
+  );
+};
 
 export default Users;

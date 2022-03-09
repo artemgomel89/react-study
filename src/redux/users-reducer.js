@@ -5,6 +5,7 @@ const initialState = {
   pageSize: 5,
   currentPage: 1,
   totalUsersCount: 20,
+  isLoading: false,
 };
 
 const usersReducer = (state = initialState, action) => {
@@ -29,6 +30,17 @@ const usersReducer = (state = initialState, action) => {
         ...state,
         currentPage: action.currentPage,
       };
+    case CONSTANTS.SET_TOTAL_COUNT:
+      return {
+        ...state,
+        totalUsersCount: action.totalCount,
+      };
+    case CONSTANTS.SET_IS_LOADING:
+      return {
+        ...state,
+        isLoading: action.isLoading,
+      };
+
     default:
       return state;
   }
@@ -47,6 +59,16 @@ export const setUsersAC = (users) => ({
 export const setCurrentPageAC = (page) => ({
   type: CONSTANTS.SET_CURRENT_PAGE,
   currentPage: page,
+});
+
+export const setTotalCountAC = (totalCount) => ({
+  type: CONSTANTS.SET_TOTAL_COUNT,
+  totalCount: totalCount,
+});
+
+export const setIsLoadingAC = (bool) => ({
+  type: CONSTANTS.SET_IS_LOADING,
+  isLoading: bool,
 });
 
 export default usersReducer;
